@@ -10,13 +10,11 @@ use App\Models\User;
 
 class ResetPasswordController extends Controller
 {
-    // عرض نموذج إعادة تعيين كلمة المرور
     public function showResetForm($token)
     {
         return view('auth.passwords.reset', ['token' => $token]);
     }
 
-    // إعادة تعيين كلمة المرور
     public function reset(Request $request)
     {
         $request->validate([
@@ -25,21 +23,17 @@ class ResetPasswordController extends Controller
             'token' => 'required'
         ]);
 
-        // استعادة المستخدم عبر البريد الإلكتروني
         $response = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
-                // تحديث كلمة المرور
                 $user->forceFill([
                     'password' => bcrypt($password),
                 ])->save();
 
-                // إطلاق حدث لإعادة تعيين كلمة المرور
                 event(new PasswordReset($user));
             }
         );
 
-        // استجابة بناءً على النتيجة
         return $response == Password::PASSWORD_RESET
             ? response()->json(['message' => 'Password reset successfully.'])
             : response()->json(['message' => 'Failed to reset password.'], 400);

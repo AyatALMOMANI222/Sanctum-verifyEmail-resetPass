@@ -1,0 +1,31 @@
+.navbar-container {
+  background-color: black !important;
+  color: white;
+
+  .container {
+    max-width: 100%;
+  }
+
+  .navbar-brand {
+    padding-left: 6rem;
+  }
+  .navbar-brand,
+  .nav-link,
+  .btn {
+    color: white !important;
+    text-decoration: none;
+    border: none;
+
+    &:hover {
+      border: none;
+      color: rgb(75, 153, 255) !important;
+    }
+  }
+
+  .navbar-toggler-icon {
+    filter: invert(100%);
+  }
+  .nav-items-container {
+    margin: auto !important;
+  }
+}

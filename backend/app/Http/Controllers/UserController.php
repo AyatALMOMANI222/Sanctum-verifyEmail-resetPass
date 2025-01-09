@@ -45,9 +45,9 @@ class UserController extends Controller
                 'email' => $validatedData['email'],
                 'password' => bcrypt($validatedData['password']),
                 'phone' => $validatedData['phone'],
-                'whatsapp' => $validatedData['whatsapp'],
-                'address' => $validatedData['address'],
-                'location' => $validatedData['location'],
+                'whatsapp' => $validatedData['whatsapp']??null,
+                'address' => $validatedData['address']??null,
+                'location' => $validatedData['location']??null,
                 'is_admin' => $validatedData['is_admin'],
             ]);
          
